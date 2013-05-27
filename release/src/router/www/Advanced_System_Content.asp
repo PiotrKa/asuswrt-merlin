@@ -562,7 +562,7 @@ function load_dst_m_Options(){
 			if(i==3){
 				add_option(document.form.dst_start_m, dst_month[i], i, 1);
 				add_option(document.form.dst_end_m, dst_month[i], i, 0);
-			}else if(i==10){
+			}else if(i==11){
 				add_option(document.form.dst_start_m, dst_month[i], i, 0);
 				add_option(document.form.dst_end_m, dst_month[i], i, 1);
 			}else{
@@ -591,6 +591,9 @@ function load_dst_w_Options(){
 		if(!dstoffset){		//none dst_offset
 			if(i==2){
 				add_option(document.form.dst_start_w, dst_week[i], i, 1);
+				add_option(document.form.dst_end_w, dst_week[i], i, 0);
+			}else if(i==1){
+				add_option(document.form.dst_start_w, dst_week[i], i, 0);
 				add_option(document.form.dst_end_w, dst_week[i], i, 1);
 			}else{
 				add_option(document.form.dst_start_w, dst_week[i], i, 0);
