@@ -10,7 +10,7 @@ if [ ! -s squished/squish-done ]; then
 	for f in {protocols/*/*.pat,*.pat}; do
 		n=`basename $f`
 		[ ! -f $f ] && break
-		echo -en "Squishing: $n                \r"
+		echo -en "Squishing: $n                \n"
 		grep -v "^\s*$\|^#\|^userspace " $f > squished/$n
 		if [ `wc -l squished/$n | cut -d ' ' -f 1` -ne 2 ]; then
 			echo "error while squishing $f..."

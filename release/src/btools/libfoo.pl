@@ -75,7 +75,7 @@ sub load
 		return;
 	}
 
-	print "$elf_type{$base} $base", " " x 30, "\r";
+	print "$elf_type{$base} $base", " " x 30, "\n";
 	
 	push(@elfs, $base);
 	
@@ -480,9 +480,9 @@ if ((!-d $root) || (!-d $uclibc) || (!-d $router)) {
 #open(LOG, ">libfoo.debug");
 open(LOG, ">/dev/null");
 
-print "Loading...\r";
+print "Loading...\n";
 load($root);
-print "Finished loading files.", " " x 30, "\r";
+print "Finished loading files.", " " x 30, "\n";
 
 fixDyn();
 fillGaps();
