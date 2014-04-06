@@ -148,32 +148,7 @@ int ntp_main(int argc, char *argv[])
 			if(nvram_get_int("ntp_ready"))
 			{
 				nvram_set("ntp_ready", "0");
-
-				/* ntp sync every hour when time_zone set as "DST" */
-				if(strstr(nvram_safe_get("time_zone_x"), "DST")) {
-					struct tm local;
-					time_t now;
-					int diff_sec;
-
-					time(&now);
-					localtime_r(&now, &local);
-//					dbg("%s: %d-%d-%d, %d:%d:%d dst:%d\n", __FUNCTION__, local.tm_year+1900, local.tm_mon+1, local.tm_mday, local.tm_hour, local.tm_min, local.tm_sec, local.tm_isdst);
-
-					/* every hour */
-					if((local.tm_min != 0) || (local.tm_sec != 0)) {
-						/* compensate for the sleep(SECONDS_TO_WAIT) */
-						diff_sec = (3600 - SECONDS_TO_WAIT) - (local.tm_min * 60 + local.tm_sec);
-						if(diff_sec == 0) diff_sec = 3600 - SECONDS_TO_WAIT;
-						else if(diff_sec < 0) diff_sec = -diff_sec;
-//						dbg("diff_sec: %d \n", diff_sec);
-						sleep(diff_sec);
-					}
-					else sleep(3600 - SECONDS_TO_WAIT);
-				}
-				else	/* every 12 hours */
-				{
-					sleep(3600 * 12 - SECONDS_TO_WAIT);
-				}
+				sleep(3600 - SECONDS_TO_WAIT);
 			}
 			else
 			{
