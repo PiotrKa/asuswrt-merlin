@@ -92,10 +92,6 @@ static void catch_sig(int sig)
 		}
 		else strcpy(servers, "");
 	}
-	else if (sig == SIGTSTP)
-	{
-		ntp_service();
-	}
 	else if (sig == SIGTERM)
 	{
 		remove("/var/run/ntp.pid");
@@ -119,7 +115,6 @@ int ntp_main(int argc, char *argv[])
 	dbg("starting ntp...\n");
 
 	signal(SIGALRM, catch_sig);
-	signal(SIGTSTP, catch_sig);
 	signal(SIGTERM, catch_sig);
 	signal(SIGCHLD, chld_reap);
 
@@ -148,6 +143,7 @@ int ntp_main(int argc, char *argv[])
 			if(nvram_get_int("ntp_ready"))
 			{
 				nvram_set("ntp_ready", "0");
+				ntp_service();
 				sleep(3600 - SECONDS_TO_WAIT);
 			}
 			else
