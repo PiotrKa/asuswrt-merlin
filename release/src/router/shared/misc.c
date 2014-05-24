@@ -1044,8 +1044,8 @@ char *get_productid(void)
 	return productid;
 }
 
-int backup_rx = 0;
-int backup_tx = 0;
+long backup_rx = 0;
+long backup_tx = 0;
 
 unsigned int netdev_calc(char *ifname, char *ifname_desc, unsigned long *rx, unsigned long *tx, char *ifname_desc2, unsigned long *rx2, unsigned long *tx2)
 {
@@ -1153,7 +1153,9 @@ unsigned int netdev_calc(char *ifname, char *ifname_desc, unsigned long *rx, uns
 				backup_rx = *rx;
 				backup_tx = *tx;
 			}
-			else if (unit == wan_primary_ifunit()) {
+			else if ((unit == wan_primary_ifunit())
+				// Prevent counting both wan%d_ifname and wan%d_pppoe_ifname
+				&& (strcmp(ifname, get_wan_ifname(unit)) == 0)) {
 				strcpy(ifname_desc, "INTERNET");
 				return 1;
 			}
