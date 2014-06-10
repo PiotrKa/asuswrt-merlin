@@ -1,4 +1,4 @@
-Asuswrt-Merlin - build 374.43 (xx-xxx-2014)
+Asuswrt-Merlin - build 374.43_2 (7-June-2014)
 =============================================
 
 About
@@ -48,7 +48,7 @@ Here is a list of features that Asuswrt-merlin brings over the original
 firmware:
 
 System:
-   - Based on 3.0.0.4.374_5047 sources (from RT-AC68U) from Asus
+   - Based on 3.0.0.4.374_5656 sources (from RT-AC68U) from Asus
    - Various bugfixes and optimizations
    - Some components were updated to newer versions, for improved
      stability and security
@@ -572,7 +572,14 @@ https://github.com/RMerl/asuswrt-merlin
 
 History
 -------
-374.43 (xx-xxx-2014)
+374.43_2 (7-June-2014)
+   - FIXED: NTFS disks couldn't be mounted (Paragon driver not
+            loading due to a kernel change) (AC56, AC68)
+
+
+374.43 (6-June-2014)
+   - NEW: User-configurable refresh period to trigger a DDNS
+          update after a certain number of days.
    - CHANGED: dnsmasq option 252 now defaults to an empty string,
               to silence broken clients such as Win7.
               Important: if you were previously using a customized
@@ -585,14 +592,31 @@ History
               not query for the DNS entry if there is a 252
               option through DHCP, even if it fails to connect to it.
 
+   - CHANGED: Updated miniupnpd to 1.8.20140523.
+   - CHANGED: Updated openssl to 1.0.0m.
+   - CHANGED: More backports from OpenSSL 1.0.2, improving SHA
+              performance on ARM routers.
+   - CHANGED: The JFFS2 partition is now disabled by default after
+              a factory default reset.
    - FIXED: Media server page wouldn't let you enable the iTunes
             server unless you also enabled DLNA (Asus bug)
    - FIXED: Restricted guests still had access to the router (Asus
             bug introduced in GPL 4887)
+   - FIXED: 6in4 traffic wasn't bypassing CTF if dualwan mode was
+            either disabled or set to failover mode (AC56/AC68)
+   - FIXED: Single character workgroups were rejected as invalid
+            (Asus bug)
+   - FIXED: Networks with SSIDs containing single quotes
+            would break the client list (Asus bug)
+   - FIXED: Traffic Monitor results are wrong on PPPoE connections
+            (Asus bug) (Patch by pinwing, additional debugging 
+            by fantom1)
+   - FIXED: Crash if entering close to 64 MACs plus their names on
+            the MAC filter page.
 
 
 374.42_2 (16-May-2014)
-   - FIXED: Time Machine support (AC56, Ac68)
+   - FIXED: Time Machine support (AC56, AC68)
 
 
 374.42 (9-May-2014)
@@ -712,8 +736,8 @@ History
    - FIXED: reg_mode was being enforced to "h" (EU region) or "off"
             (others) since GPL 4422.  We now stick again to what's 
             set in the webui by the end user.
-  - FIXED: Allow LAN traffic while dualwan mode is set to lb (issue
-           caused by the default policy fix in beta 1)
+   - FIXED: Allow LAN traffic while dualwan mode is set to lb (issue
+            caused by the default policy fix in beta 1)
 
 
 374.40 Beta 1 (1-March-2014)
